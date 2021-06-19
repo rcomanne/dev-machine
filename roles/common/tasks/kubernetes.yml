@@ -29,4 +29,25 @@
     - source <(kubectl completion zsh)
     - complete -F __start_kubectl k
     - alias k='kubectl'
-    - alias kn='kubectl config set-context --current --namespace=my-namespace'
+    - function kn(){ kubectl config set-context --current --namespace=$1 }
+
+- name: Add Helm repo key
+  apt_key:
+    url: https://baltocdn.com/helm/signing.asc
+    state: present
+  become: true
+
+- name: Add Helm repo
+  apt_repository:
+    state: present
+    repo: "deb https://baltocdn.com/helm/stable/debian/ all main" # No hirsute Release
+    mode: 0644
+    filename: helm
+  become: true
+
+- name: Install Helm
+  apt:
+    name: helm
+    state: present
+    update_cache: true
+  become: true

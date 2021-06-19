@@ -21,3 +21,23 @@
       - containerd.io
   become: true
 
+- name: Add Trivy repo key
+  apt_key:
+    url: https://aquasecurity.github.io/trivy-repo/deb/public.key
+    state: present
+  become: true
+
+- name: Add Trivy repo
+  apt_repository:
+    state: present
+    repo: "deb https://aquasecurity.github.io/trivy-repo/deb focal main" # No hirsute repo
+    mode: 0644
+    filename: trivy
+  become: true
+
+- name: Install Trivy
+  apt:
+    name: trivy
+    state: present
+    update_cache: true
+  become: true

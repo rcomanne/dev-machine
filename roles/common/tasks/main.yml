@@ -1,6 +1,6 @@
 ---
-- debug:
-    var: ansible_facts
+#- debug:
+#    var: ansible_facts
 
 - name: Ensure a keypair exists
   openssh_keypair:
