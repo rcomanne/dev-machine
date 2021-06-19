@@ -1,0 +1,23 @@
+---
+- name: Install zsh
+  apt:
+    state: present
+    name: zsh
+  become: true
+
+- set_fact:
+    zsh_conf: "/home/{{ ansible_facts['user_id'] }}/.zshrc"
+
+- name: Install oh my zsh
+  shell:
+    cmd: curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    creates: "{{ zsh_conf }}"
+
+- name: Configure oh my zsh
+  lineinfile:
+    path: "{{ zsh_conf }}"
+    line: "{{ item }}"
+    state: present
+  loop:
+    - 'ZSH_THEME="agnoster"'
+    - 'DEFAULT_USER=$USER'

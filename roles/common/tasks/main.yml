@@ -1,0 +1,52 @@
+---
+- debug:
+    var: ansible_facts
+
+- name: Ensure a keypair exists
+  openssh_keypair:
+    path: "/home/{{ ansible_facts['user_id'] }}/.ssh/id_rsa"
+
+- name: Update all installed packages
+  apt:
+    name: '*'
+    state: latest
+    update_cache: true
+  become: yes
+
+- name: Install basic tooling with apt
+  apt:
+    state: present
+    update_cache: true
+    name:
+      - ansible
+      - git
+      - curl
+  become: true
+
+- name: Install common apps with snap
+  snap:
+    state: present
+    name:
+      - spotify
+  become: true
+
+- name: (Oh-My) ZSH
+  include_tasks: zsh.yml
+
+- name: Java
+  include_tasks: java.yml
+
+- name: Docker
+  include_tasks: docker.yml
+
+- name: Kubernetes
+  include_tasks: kubernetes.yml
+
+- name: NodeJS
+  include_tasks: node.yml
+
+- name: Azure CLI
+  include_tasks: azure.yml
+
+- name: HashiCorp software
+  include_tasks: hashicorp.yml

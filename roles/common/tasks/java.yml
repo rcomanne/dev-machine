@@ -1,0 +1,15 @@
+---
+- name: Ensure JDK 11 & Maven installed
+  apt:
+    state: present
+    name:
+      - openjdk-11-jdk
+      - maven
+  become: true
+
+- name: Install IntelliJ IDE
+  snap:
+    state: present
+    name: intellij-idea-ultimate
+    classic: true
+  become: true

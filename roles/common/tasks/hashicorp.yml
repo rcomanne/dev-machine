@@ -1,0 +1,21 @@
+---
+- name: Add HashiCorp repo key
+  apt_key:
+    url: https://apt.releases.hashicorp.com/gpg
+  become: true
+
+- name: Add HashiCorp repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_facts['distribution_release'] }} main"
+    mode: 0644
+    filename: hashicorp
+  become: true
+
+- name: Ensure Terraform and Vault are installed
+  apt:
+    state: present
+    update_cache: true
+    name:
+      - terraform
+      - vault
+  become: true

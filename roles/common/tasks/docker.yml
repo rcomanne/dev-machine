@@ -1,0 +1,23 @@
+---
+- name: Add Docker repo key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+  become: true
+
+- name: Add Docker repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
+    mode: 0644
+    filename: docker
+  become: true
+
+- name: Ensure Docker is installed
+  apt:
+    state: present
+    update_cache: true
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+  become: true
+

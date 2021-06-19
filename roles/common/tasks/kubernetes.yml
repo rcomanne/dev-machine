@@ -1,0 +1,32 @@
+---
+- name: Add kubernetes repo key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  become: true
+
+- name: Add kubernetes repo
+  apt_repository:
+    state: present
+    repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main" # No hirsute Release
+    mode: 0644
+    filename: kubectl
+  become: true
+
+- name: Install kubectl
+  apt:
+    name: kubectl
+    state: present
+    update_cache: true
+  become: true
+
+- name: Add autocompletion to ZSH
+  lineinfile:
+    path: "{{ zsh_conf }}"
+    line: "{{ item }}"
+    state: present
+  loop:
+    - source <(kubectl completion zsh)
+    - complete -F __start_kubectl k
+    - alias k='kubectl'
+    - alias kn='kubectl config set-context --current --namespace=my-namespace'
