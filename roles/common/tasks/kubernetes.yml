@@ -29,6 +29,7 @@
     - source <(kubectl completion zsh)
     - complete -F __start_kubectl k
     - alias k='kubectl'
+    - alias kdebug='k run -it ${USER}-debug --image=alpine --rm'
     - function kn(){ kubectl config set-context --current --namespace=$1 }
 
 - name: Add Helm repo key
