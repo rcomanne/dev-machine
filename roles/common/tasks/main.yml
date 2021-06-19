@@ -21,6 +21,7 @@
       - ansible
       - git
       - curl
+      - jq
   become: true
 
 - name: Install common apps with snap
