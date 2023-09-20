@@ -19,3 +19,9 @@
       - terraform
       - vault
   become: true
+
+- name: Configure tf alias
+  lineinfile:
+    path: "{{ zsh_conf }}"
+    line: "alias tf=terraform"
+    state: present

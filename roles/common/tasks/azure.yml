@@ -8,7 +8,7 @@
 - name: Add Microsoft repo
   apt_repository:
     state: present
-    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ focal main" # No hirsute Release
+    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_facts['distribution_release'] }} main"
     filename: azure-cli
   become: true
 
