@@ -10,7 +10,7 @@
 - name: Add kubernetes repo
   apt_repository:
     state: present
-    repo: "deb [signed-by={{ kubernetes_key.dest }}] https://pkgs.k8s.io/core:/stable:/v{{ kubernetes_version }}/deb/ /" # No hirsute Release
+    repo: "deb [signed-by={{ kubernetes_key.dest }}] https://pkgs.k8s.io/core:/stable:/v{{ kubernetes_version }}/deb/ /"
     mode: 0644
     filename: kubernetes
   become: true
@@ -45,7 +45,7 @@
 - name: Add Helm repo
   apt_repository:
     state: present
-    repo: "deb [signed-by={{ helm_key.dest }}] https://baltocdn.com/helm/stable/debian/ all main" # No hirsute Release
+    repo: "deb [signed-by={{ helm_key.dest }}] https://baltocdn.com/helm/stable/debian/ all main"
     mode: 0644
     filename: helm
   become: true

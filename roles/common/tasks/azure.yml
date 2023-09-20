@@ -10,7 +10,7 @@
 - name: Add Microsoft repo
   apt_repository:
     state: present
-    repo: "deb [arch=amd64 signed-by={{ microsoft_key.dest }}] https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main"
+    repo: "deb [arch=amd64 signed-by={{ microsoft_key.dest }}] https://packages.microsoft.com/repos/azure-cli/ {{ codename }} main"
     filename: azure-cli
   become: true
 

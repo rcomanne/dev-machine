@@ -16,7 +16,7 @@
 
 - name: Install oh my zsh
   shell:
-    cmd: /tmp/install.sh
+    cmd: /tmp/zsh-install.sh
     creates: "{{ zsh_conf }}"
 
 - name: Configure oh my zsh

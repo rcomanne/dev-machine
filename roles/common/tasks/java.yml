@@ -14,3 +14,4 @@
     name: intellij-idea-ultimate
     classic: true
   become: true
+  when: ansible_facts['distribution'] == "Ubuntu"

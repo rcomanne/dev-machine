@@ -10,7 +10,7 @@
 - name: Add HashiCorp repo
   apt_repository:
     state: present
-    repo: "deb [signed-by={{ hashicorp_key.dest }}] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+    repo: "deb [signed-by={{ hashicorp_key.dest }}] https://apt.releases.hashicorp.com {{ codename }} main"
     filename: hashicorp
   become: true
 

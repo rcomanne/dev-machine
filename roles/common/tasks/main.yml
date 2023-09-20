@@ -2,6 +2,16 @@
 #- debug:
 #    var: ansible_facts
 
+- name: Set codename Debian systems
+  set_fact:
+    codename: "jammy"
+  when: ansible_facts['distribution_file_variety'] == "Debian"
+
+- name: Set codename Ubuntu systems
+  set_fact:
+    codename: "{{ ansible_facts['distribution_release'] }}"
+  when: ansible_facts['distribution'] == "Ubuntu"
+
 - name: Ensure a keypair exists
   openssh_keypair:
     path: "/home/{{ ansible_facts['user_id'] }}/.ssh/id_rsa"
@@ -32,6 +42,7 @@
     name:
       - spotify
   become: true
+  when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: (Oh-My) ZSH
   include_tasks: zsh.yml
