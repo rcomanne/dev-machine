@@ -1,13 +1,16 @@
 ---
-- name: Add HashiCorp repo key
-  apt_key:
+- name: Download HashiCorp repo key
+  get_url:
     url: https://apt.releases.hashicorp.com/gpg
+    dest: /etc/apt/keyrings/hashicorp.asc
+    mode: '0644'
+  register: hashicorp_key
   become: true
 
 - name: Add HashiCorp repo
   apt_repository:
-    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ ansible_facts['distribution_release'] }} main"
-    mode: 0644
+    state: present
+    repo: "deb [signed-by={{ hashicorp_key.dest }}] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
     filename: hashicorp
   become: true
 

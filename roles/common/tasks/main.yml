@@ -23,6 +23,7 @@
       - curl
       - jq
       - vim
+      - htop
   become: true
 
 - name: Install common apps with snap

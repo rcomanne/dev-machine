@@ -1,9 +1,10 @@
 ---
-- name: Ensure JDK 11 & Maven installed
+- name: Ensure JDK 11, 17 & Maven installed
   apt:
     state: present
     name:
       - openjdk-11-jdk
+      - openjdk-17-jdk
       - maven
   become: true
 
