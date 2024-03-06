@@ -1,6 +1,6 @@
 ---
 - set_fact:
-    node_version: '14'
+    node_version: '20'
 
 - name: Add NodeJS apt repo key
   apt_key:
